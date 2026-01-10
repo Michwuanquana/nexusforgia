@@ -6,7 +6,7 @@ A web-based Doom map editor running entirely in your browser.
 
 *Nexum* (lat. "connection") + *Forgia* (it. "forge") — where geometry is forged and everything connects.
 
-**Live Demo:** https://udmf.yrx.cz
+**Live:** https://nexusforgia.org
 
 ---
 
@@ -70,28 +70,40 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for technical details.
 
 ---
 
-## Heritage
+## On AI-Assisted Development
 
-This project builds upon the work of established Doom editing tools:
+This project was built using Claude (Opus 4.5) as a development partner. I want to be upfront about this because transparency matters.
 
-- **[Doom Builder X](https://github.com/anotak/doombuilderx)** by anotak — The original desktop map editor (C#/WinForms) that inspired the UI/UX patterns and editing workflows. Source available at `~/depend/dmx/`.
+**What this is not:**
+- This is not "vibecoding" — random prompts hoping for magic
+- This is not stolen or scraped code from other projects
+- This is not a lazy copy-paste job with no understanding
 
-- **[SLADE](https://github.com/sirjuddington/SLADE)** by sirjuddington — A comprehensive Doom editor for resource and map editing (C++/wxWidgets). Reference for WAD format handling and advanced features. Source available at `~/depend/slade/`.
+**What this actually is:**
 
-Both projects are GPL-licensed, and NexumForgia continues this tradition.
+The development process followed a structured approach: architecture was planned before writing code, each feature was specified with clear requirements, and implementation went through multiple iterations of review and refinement. Every piece of code was discussed, understood, and intentionally placed.
 
----
+AI is a tool. Like any tool, it can be used well or poorly. A hammer doesn't build a house — a person with a plan does. The same applies here: Claude helped translate ideas into code faster, but the design decisions, architecture choices, and quality standards came from human direction.
 
-## About This Project
+**The uncomfortable truth:** AI is changing software development whether we like it or not. I personally don't see a problem with using it responsibly — with clear attribution, respect for licenses, and genuine understanding of what's being built. This project aims to demonstrate that AI-assisted development can produce legitimate, quality software.
 
-**Built with Claude Opus 4.5** — This project was developed through structured AI-assisted programming, not "vibe coding". The development followed a planned architecture with clear specifications, iterative implementation, and systematic testing.
+All code is open source under GPL-3.0. Nothing is hidden.
 
 **Project Metrics:**
 - ~15,000 lines of TypeScript/React code
 - 69 source files
-- Estimated ~60k tokens of source context
+- Stack: React 19, TypeScript, PixiJS 8, Zustand, Tailwind CSS
 
-The entire codebase was developed in conversation with Claude, demonstrating that AI-assisted development can produce production-quality software when guided by clear requirements and architectural vision.
+---
+
+## Heritage
+
+This project builds on the shoulders of giants:
+
+- **[Doom Builder X](https://github.com/anotak/doombuilderx)** by anotak — Desktop map editor (C#) that inspired the UI patterns
+- **[SLADE](https://github.com/sirjuddington/SLADE)** by sirjuddington — Comprehensive Doom editor for reference on WAD formats
+
+Both projects are GPL-licensed, and NexumForgia continues this tradition.
 
 ---
 
@@ -99,6 +111,6 @@ The entire codebase was developed in conversation with Claude, demonstrating tha
 
 **GPL-3.0**
 
-This project is licensed under the GNU General Public License v3.0, maintaining compatibility with its heritage projects (Doom Builder X and SLADE).
+This project is licensed under the GNU General Public License v3.0, maintaining compatibility with its heritage projects.
 
 See [LICENSE](LICENSE) for the full text.

@@ -10,6 +10,11 @@ services:
       - traefik_network
     labels:
       - "traefik.enable=true"
+      # Production - nexusforgia.org
+      - "traefik.http.routers.nexusforgia.rule=Host(`nexusforgia.org`) || Host(`www.nexusforgia.org`)"
+      - "traefik.http.routers.nexusforgia.entrypoints=websecure"
+      - "traefik.http.routers.nexusforgia.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.nexusforgia.service=udmf-www-service"
       # Dev - udmf.yrx.cz
       - "traefik.http.routers.udmf-www.rule=Host(`udmf.yrx.cz`)"
       - "traefik.http.routers.udmf-www.entrypoints=websecure"
