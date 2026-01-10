@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+.claude/
+*.swp
+*.swo
+
+# Docker dev overrides
+docker-compose.override.yml
+
+# Misc
+*.pem
+*.tsbuildinfo
+
+# Backend feedback (except .gitkeep)
+backend/feedback/*.md
+!backend/feedback/.gitkeep
+
+# Claude instructions (project-specific, not in repo)
+CLAUDE.md
+
+# Source code references
+docs/doombuilderx/

@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --editor-bg: #1a1a2e;
+  --panel-bg: #16213e;
+  --panel-border: #0f3460;
+  --accent: #e94560;
+  --text-primary: #eee;
+  --text-secondary: #888;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--editor-bg);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
