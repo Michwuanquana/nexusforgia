@@ -1,7 +1,5 @@
 # NexumForgia
 
-![NexumForgia Logo](www/public/logo.png)
-
 A web-based Doom map editor running entirely in your browser.
 
 *Nexum* (lat. "connection") + *Forgia* (it. "forge") — where geometry is forged and everything connects.
