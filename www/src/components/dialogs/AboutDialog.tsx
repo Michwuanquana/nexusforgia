@@ -9,7 +9,7 @@ interface AboutDialogProps {
 
 const VERSION = '0.1.0';
 const GITHUB_URL = 'https://github.com/Michwuanquana/nexusforgia';
-const API_URL = import.meta.env.PROD ? 'https://api-udmf.yrx.cz' : 'http://localhost:3001';
+const API_URL = import.meta.env.PROD ? 'https://api.nexumforgia.org' : 'http://localhost:3001';
 
 const ABOUT_CONTENT = `
 # NexumForgia

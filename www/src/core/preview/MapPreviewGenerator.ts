@@ -3,8 +3,8 @@
 import { MapData } from '../map/MapData';
 import { LinedefFlags } from '../map/types';
 import {
-  PreviewOptions,
-  PreviewColorScheme,
+  type PreviewOptions,
+  type PreviewColorScheme,
   DEFAULT_PREVIEW_OPTIONS,
 } from './types';
 

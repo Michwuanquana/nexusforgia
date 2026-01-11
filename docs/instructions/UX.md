@@ -1,15 +1,15 @@
-Dobrá otázka. Pojďme udělat realistické srovnání:
+Good question. Let's make a realistic comparison:
 
-## Vztah k DoomBuilderX desktop verzi
+## Relation to DoomBuilderX desktop version
 
-V adresáři [docs/doombuilderx/](docs/doombuilderx/) se nachází kompletní zdrojové kódy desktopové aplikace DoomBuilderX (C#). 
+The [docs/doombuilderx/](docs/doombuilderx/) directory contains the complete source code of the DoomBuilderX desktop application (C#). 
 
-Naše webová verze (v `www/src/`) staví na stejných principech a uživatelské zkušenosti. Cílem je, aby se uživatelé DBX cítili v našem webovém editoru jako doma. Detailní návrh migrace logiky z C# do TypeScriptu najdeš v [docs/MIGRATES.md](docs/MIGRATES.md).
+Our web version (in `www/src/`) is built on the same principles and user experience. The goal is for DBX users to feel at home in our web editor. You can find a detailed plan for migrating logic from C# to TypeScript in [docs/MIGRATES.md](docs/MIGRATES.md).
 
-## Co máme vs DoomBuilderX
+## What we have vs DoomBuilderX
 
-### ✅ Pokryto v INSTRUCTIONS (základ hotov v dokumentaci)
-| Feature | DBX | My implementace |
+### ✅ Covered in INSTRUCTIONS (documentation base complete)
+| Feature | DBX | Our implementation |
 |---------|-----|-----------------|
 | Vertex Mode (select, move, delete, merge) | ✅ | ✅ |
 | Linedef Mode (select, move, flip, split) | ✅ | ✅ |
@@ -21,93 +21,93 @@ Naše webová verze (v `www/src/`) staví na stejných principech a uživatelsk�
 | Geometry snap (vertex/line) | ✅ | ✅ |
 | Box selection | ✅ | ✅ |
 | Keyboard shortcuts | ✅ | ✅ |
-| WAD import (Doom + Hexen) | ✅ | ✅ (už implementováno) |
+| WAD import (Doom + Hexen) | ✅ | ✅ (already implemented) |
 | Texture management (basic) | ✅ | ✅ |
 
-### 🔶 Částečně / Zjednodušeně
+### 🔶 Partial / Simplified
 
-| Feature | DBX | Náš stav | Poznámka |
+| Feature | DBX | Our status | Note |
 |---------|-----|----------|----------|
-| Copy/Paste | Full | 🔲 | Není v instrukci, nutno doplnit |
-| Auto sector detection | Full | 🔲 | Klíčové! Chybí `SectorBuilder` |
-| Texture alignment | Auto + Manual | 🔲 | Jen stub v instrukci |
-| Properties dialogs | Full GUI | 🔲 | Chybí React komponenty |
-| Thing browser | Categories + sprites | 🔲 | Jen základ |
+| Copy/Paste | Full | 🔲 | Not in instruction, needs to be added |
+| Auto sector detection | Full | 🔲 | Critical! Missing `SectorBuilder` |
+| Texture alignment | Auto + Manual | 🔲 | Stub only in instruction |
+| Properties dialogs | Full GUI | 🔲 | Missing React components |
+| Thing browser | Categories + sprites | 🔲 | Basic only |
 
-### ❌ Chybí kompletně (významné)
+### ❌ Completely missing (significant)
 
-| Feature | Složitost | Priorita |
+| Feature | Complexity | Priority |
 |---------|-----------|----------|
-| **3D Visual Mode** | 🔴 Vysoká | P1 - killer feature DBX |
-| **Nodebuilder** (BSP, SEGS, SSECTORS) | 🔴 Vysoká | P1 - nutné pro export |
-| **WAD Export** (Hexen format) | 🟡 Střední | P1 |
-| **BEHAVIOR lump** (ACS bytecode) | 🟡 Střední | P2 |
-| Curve Linedefs tool | 🟢 Nízká | P3 |
-| Stair builder | 🟢 Nízká | P3 |
-| Door/Lift wizards | 🟢 Nízká | P3 |
-| Make Sector (from selection) | 🟡 Střední | P2 |
-| Texture browser (full) | 🟡 Střední | P2 |
-| Map statistics | 🟢 Nízká | P4 |
-| Error checker | 🟡 Střední | P2 |
-| Prefabs | 🟡 Střední | P3 |
-| Script editor (ACS) | 🟡 Střední | P3 |
-| Game configurations | 🟡 Střední | P2 |
-| Multiple map support | 🟢 Nízká | P3 |
-| Find & Replace | 🟢 Nízká | P4 |
+| **3D Visual Mode** | 🔴 High | P1 - killer feature of DBX |
+| **Nodebuilder** (BSP, SEGS, SSECTORS) | 🔴 High | P1 - required for export |
+| **WAD Export** (Hexen format) | 🟡 Medium | P1 |
+| **BEHAVIOR lump** (ACS bytecode) | 🟡 Medium | P2 |
+| Curve Linedefs tool | 🟢 Low | P3 |
+| Stair builder | 🟢 Low | P3 |
+| Door/Lift wizards | 🟢 Low | P3 |
+| Make Sector (from selection) | 🟡 Medium | P2 |
+| Texture browser (full) | 🟡 Medium | P2 |
+| Map statistics | 🟢 Low | P4 |
+| Error checker | 🟡 Medium | P2 |
+| Prefabs | 🟡 Medium | P3 |
+| Script editor (ACS) | 🟡 Medium | P3 |
+| Game configurations | 🟡 Medium | P2 |
+| Multiple map support | 🟢 Low | P3 |
+| Find & Replace | 🟢 Low | P4 |
 
-### ❌ Chybí kompletně (pokročilé)
+### ❌ Completely missing (advanced)
 
-| Feature | Poznámka |
+| Feature | Note |
 |---------|----------|
 | Slopes editing | ZDoom/GZDoom specific |
 | 3D floors | ZDoom specific |
-| UDMF support | Jiný formát než Hexen |
+| UDMF support | Different format than Hexen |
 | Portals | ZDoom specific |
 | Custom DECORATE/ZScript | Out of scope? |
 | Plugins system | Out of scope |
 
 ---
 
-## Hrubý odhad práce
+## Rough work estimate
 
 ```
-Dokumentace pokrývá:     ~25% funkcionality DBX
-Již implementováno:       ~15% (WAD parser, renderer, základní UI)
+Documentation covers:     ~25% of DBX functionality
+Already implemented:       ~15% (WAD parser, renderer, basic UI)
 ─────────────────────────────────────────────────────
-Celkem hotovo:           ~40% základního editoru
+Total complete:            ~40% of basic editor
 
-Chybí do "použitelného editoru":
-├── Auto sector detection    ~2-3 dny
-├── WAD Export (Hexen)       ~2 dny  
-├── Nodebuilder integration  ~1-2 dny (použít ZDBSP/glBSP)
-├── Properties dialogs       ~3-4 dny
-├── Texture browser          ~2 dny
-└── 3D Mode                  ~5-10 dnů (!)
+Missing for "usable editor":
+├── Auto sector detection    ~2-3 days
+├── WAD Export (Hexen)       ~2 days  
+├── Nodebuilder integration  ~1-2 days (use ZDBSP/glBSP)
+├── Properties dialogs       ~3-4 days
+├── Texture browser          ~2 days
+└── 3D Mode                  ~5-10 days (!)
                             ─────────────
-                            ~15-25 dnů do MVP
+                            ~15-25 days to MVP
 
-Chybí do "plnohodnotného editoru":
-├── Script editor            ~3-4 dny
-├── Error checker            ~2 dny
-├── Wizards (stairs, doors)  ~2-3 dny
-├── Prefabs                  ~2 dny
-└── Polish & edge cases      ~5+ dnů
+Missing for "full-featured editor":
+├── Script editor            ~3-4 days
+├── Error checker            ~2 days
+├── Wizards (stairs, doors)  ~2-3 days
+├── Prefabs                  ~2 days
+└── Polish & edge cases      ~5+ days
                             ─────────────
-                            ~30-40 dnů total
+                            ~30-40 days total
 ```
 
 ---
 
-## Kritické chybějící komponenty
+## Critical missing components
 
 ### 1. SectorBuilder (Auto sector detection)
 ```typescript
-// Tohle MUSÍME mít - jinak nelze kreslit nové sektory
+// We MUST have this - otherwise new sectors cannot be drawn
 class SectorBuilder {
-  // Když uživatel uzavře loop linií, automaticky vytvoří sektor
+  // Automatically create a sector when user closes a loop of lines
   detectClosedLoops(linedefs: Linedef[]): Sector[]
   
-  // Když linedef rozdělí existující sektor
+  // When a linedef splits an existing sector
   splitSector(sector: Sector, dividingLine: Linedef): [Sector, Sector]
   
   // Winding order detection (which side is "inside")
@@ -117,23 +117,23 @@ class SectorBuilder {
 
 ### 2. Nodebuilder
 ```
-Možnosti:
-a) Port ZDBSP do WASM (~složité)
-b) Zavolat server-side ZDBSP (~jednodušší)
-c) Napsat vlastní BSP builder (~velmi složité)
+Options:
+a) Port ZDBSP to WASM (~complex)
+b) Call server-side ZDBSP (~simpler)
+c) Write custom BSP builder (~very complex)
 
-Doporučuji: (b) - API endpoint který spustí ZDBSP
+Recommendation: (b) - API endpoint that runs ZDBSP binary
 ```
 
 ### 3. 3D Visual Mode
-Detailní návrh implementace 3D režimu byl přesunut do samostatného souboru: **[docs/IMPLEMENTATION_3D.md](docs/IMPLEMENTATION_3D.md)**.
+Detailed implementation plan for 3D mode has been moved to a separate file: **[docs/IMPLEMENTATION_3D.md](docs/IMPLEMENTATION_3D.md)**.
 
 ---
 
-## Chceš abych dopsal některou z chybějících částí?
+## Do you want me to write any of the missing parts?
 
-Doporučená priorita:
-1. **SectorBuilder** - bez toho editor nefunguje
-2. **WAD Export** - bez toho není výstup
-3. **Properties dialogs** - bez toho nelze nastavovat textury/specials
+Recommended priority:
+1. **SectorBuilder** - editor doesn't work without it
+2. **WAD Export** - no output without it
+3. **Properties dialogs** - cannot set textures/specials without them
 4. **3D Mode** - killer feature

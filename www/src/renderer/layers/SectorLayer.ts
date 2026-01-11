@@ -327,10 +327,11 @@ export class SectorLayer {
           const texture = this.getPixiTexture(textureName);
 
           if (texture) {
-            // Use texture fill with tiling
+            // Doom FLAT textures are 64x64 and use planar world-space UV mapping
+            // Texture pixel [0,0] maps to world coordinate [0,0]
+            // 64 world units = 1 full texture repeat
             const matrix = new PIXI.Matrix();
-            // Scale texture to 64x64 in world units (Doom flat size)
-            matrix.scale(1, 1);
+            matrix.scale(1 / 64, 1 / 64);
 
             this.graphics.fill({
               texture,

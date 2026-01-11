@@ -4,7 +4,7 @@
 help:
 	@echo "Available commands:"
 	@echo "  make build        - Build Docker images"
-	@echo "  make deploy-dev   - Deploy to development (udmf.yrx.cz)"
+	@echo "  make deploy-dev   - Deploy to development (dev.nexumforgia.org)"
 	@echo "  make logs         - Show container logs"
 	@echo "  make shell        - Open shell in www container"
 	@echo "  make shell-api    - Open shell in backend container"
@@ -18,8 +18,8 @@ build:
 # Deploy development
 deploy-dev:
 	docker compose up -d --build
-	@echo "Deployed to https://udmf.yrx.cz"
-	@echo "API available at https://api-udmf.yrx.cz"
+	@echo "Deployed to https://dev.nexumforgia.org"
+	@echo "API available at https://api.nexumforgia.org"
 
 # Logs
 logs:

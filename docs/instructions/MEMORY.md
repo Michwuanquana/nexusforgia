@@ -134,7 +134,7 @@ Pro známé IWADs (DOOM.WAD, DOOM2.WAD, HERETIC.WAD, HEXEN.WAD):
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                   PRE-BUILT ASSETS                       │
-│  (CDN: cdn.nexumforgia.org/textures/doom2/)                 │
+│  (CDN: cdn.udmf.yrx.cz/textures/doom2/)                 │
 ├─────────────────────────────────────────────────────────┤
 │  /doom2/                                                 │
 │    ├── manifest.json    (texture metadata)              │
@@ -175,7 +175,7 @@ For real-time texture browsing:
 
 ```typescript
 // Client
-const ws = new WebSocket('wss://api-nexumforgia.org/texture-stream');
+const ws = new WebSocket('wss://api-udmf.yrx.cz/texture-stream');
 
 ws.onopen = () => {
   // Request visible textures
@@ -230,7 +230,7 @@ services:
     volumes:
       - wad-cache:/var/cache/wad
     labels:
-      - "traefik.http.routers.textures.rule=Host(`textures.nexumforgia.org`)"
+      - "traefik.http.routers.textures.rule=Host(`textures.udmf.yrx.cz`)"
 ```
 
 **Technologie:**

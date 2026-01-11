@@ -29,7 +29,7 @@ export class LinedefLayer {
   ): void {
     this.graphics.clear();
 
-    const baseWidth = Math.max(1, 2 / camera.zoom);
+    const baseWidth = Math.max(0.5, 1 / camera.zoom);
 
     for (const [id, linedef] of map.linedefs) {
       const v1 = map.vertices.get(linedef.v1);

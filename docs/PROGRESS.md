@@ -3,24 +3,24 @@
 ## Workflow
 
 ```
-1. Implementace → 2. Test v prohlížeči → 3. Commit → 4. Deploy (make deploy-dev)
+1. Implementation → 2. Browser Test → 3. Commit → 4. Deploy (make deploy-dev)
 ```
 
-### Denní workflow
-1. Zkontrolovat PROGRESS.md - co je rozpracované
-2. Implementovat další feature/fix
-3. Otestovat lokálně (`npm run dev`)
-4. Commit změn
-5. Deploy na https://udmf.yrx.cz (`make deploy-dev`)
+### Daily Workflow
+1. Check PROGRESS.md - see what's in progress
+2. Implement next feature/fix
+3. Test locally (`npm run dev`)
+4. Commit changes
+5. Deploy to https://nexumforgia.org (`make deploy-dev`)
 
-### Git workflow
-- `main` branch = stabilní verze
-- Feature branches pro větší změny
+### Git Workflow
+- `main` branch = stable version
+- Feature branches for larger changes
 - Commit messages: `feat:`, `fix:`, `refactor:`, `docs:`
 
 ---
 
-## Fáze 1: Základy
+## Phase 1: Basics
 
 | Task | Status | Notes |
 |------|--------|-------|
@@ -36,7 +36,7 @@
 | Basic UI layout | ✅ | Viewport, Toolbar, StatusBar |
 | Display loaded map | ✅ | Vertices, linedefs, things |
 
-## Fáze 2: Interakce
+## Phase 2: Interaction
 
 | Task | Status | Notes |
 |------|--------|-------|
@@ -47,12 +47,12 @@
 | Undo/redo system | ✅ | ActionStack with Ctrl+Z/Y |
 | Keyboard shortcuts | ✅ | V/L/S/T for modes, G for grid, Ctrl+Z/Y undo/redo |
 
-## Fáze 3: Editace
+## Phase 3: Editing
 
 | Task | Status | Notes |
 |------|--------|-------|
-| Draw mode (Lines) | ✅ | RMB začne, LMB pokračuje, RMB/Escape ukončí |
-| Sector detection | ✅ | Shift+B nebo toolbar button, SectorBuilder |
+| Draw mode (Lines) | ✅ | RMB starts, LMB continues, RMB/Escape ends |
+| Sector detection | ✅ | Shift+B or toolbar button, SectorBuilder |
 | Thing mode | ✅ | RMB insert+drag, Delete key, hover drag |
 | Sector mode | ✅ | Box selection, Delete key, hover drag |
 | Vertex mode | ✅ | Merge (Shift+M), Join (J), hover drag |
@@ -61,28 +61,28 @@
 | Map format selection | ✅ | Boom Doom/Doom2, Hexen, ZDoom, ZDaemon |
 | Session management | ✅ | Save/Load sessions, clear all data |
 
-## Fáze 4: Pokročilé
+## Phase 4: Advanced
 
 | Task | Status | Notes |
 |------|--------|-------|
-| Texture browser | ✅ | Virtuální scrolling, kategorie, vyhledávání |
+| Texture browser | ✅ | Virtual scrolling, categories, search |
 | Texture selector | ✅ | Inline preview, click/right-click |
-| FLAT texture display | ✅ | Floor/ceiling view mode zobrazuje textury |
-| Thing type picker | ✅ | Kategorizovaný výběr thing typů |
-| ScrubInput komponenta | ✅ | Photoshop-style drag-to-change hodnoty |
+| FLAT texture display | ✅ | Floor/ceiling view mode displays textures |
+| Thing type picker | ✅ | Categorized selection of thing types |
+| ScrubInput component | ✅ | Photoshop-style drag-to-change values |
 | Auto texture alignment | ✅ | Shift+A, auto-align along connected walls |
-| Copy/paste | ✅ | Ctrl+C/X/V, Delete, s remapováním ID |
+| Copy/paste | ✅ | Ctrl+C/X/V, Delete, with ID remapping |
 | WAD export (Hexen) | ✅ | Toolbar + Ctrl+Shift+S |
 | BEHAVIOR lump | ✅ | Import/export preservation (passthrough) |
 | SCRIPTS lump | ✅ | ACS source code preservation |
 | 3D preview | 🔲 | |
 
-## Fáze 5: Export & Polish
+## Phase 5: Export & Polish
 
 | Task | Status | Notes |
 |------|--------|-------|
-| WAD Writer | ✅ | Export mapy do WAD (Doom/Hexen format) |
-| UDMF export | 🔲 | Textový formát pro ZDoom |
+| WAD Writer | ✅ | Export map to WAD (Doom/Hexen format) |
+| UDMF export | 🔲 | Text format for ZDoom |
 | Minimap | 🔲 | |
 | Preferences | 🔲 | |
 | Custom keybindings | 🔲 | |
@@ -93,9 +93,9 @@
 
 | Issue | Priority | Notes |
 |-------|----------|-------|
-| Sector drawing mode | Low | RMB na prázdno v SectorMode - možnost kreslit sektory |
-| DrawMode v Toolbar | Low | Viewport má placeholder 'draw' mód |
-| Wall texture display | Medium | Zobrazení wall textur na linedefech (3D preview) |
+| Sector drawing mode | Low | RMB on empty space in SectorMode - possibility to draw sectors |
+| DrawMode in Toolbar | Low | Viewport has placeholder 'draw' mode |
+| Wall texture display | Medium | Displaying wall textures on linedefs (3D preview) |
 
 ---
 
@@ -120,7 +120,7 @@
 - Keyboard shortcuts for mode switching
 - Selection store ready
 
-**Evening update (late night with kratom 😄):**
+**Evening update:**
 - Implemented complete editing system based on INSTRUCTIONS_EDITING.md
 - Core Infrastructure:
   - EditModeContext, ModeManager, SelectionManager
@@ -138,199 +138,199 @@
   - FlipLinedefAction, DeleteLinedefsAction
 - Integrated EditorController into Viewport
 - Keyboard shortcuts: V/L/S/T (modes), Ctrl+Z/Y (undo/redo)
-- Successfully deployed to https://udmf.yrx.cz
+- Successfully deployed to https://nexumforgia.org
 
 ### 2026-01-10 (Session 2)
 
 **Map Format & Selection:**
-- Nový `MapFormat.ts` - definice formátů (doom, boom_doom, boom_doom2, hexen, zdoom_hexen, zdaemon)
-- `MapSelectionDialog.tsx` - výběr mapy z WAD s autodetekce formátu
-- `NewMapDialog.tsx` - vytvoření nové mapy s výběrem formátu
-- Fix: WAD reader správně čte pouze lumpy pro vybranou mapu (ne až poslední)
+- New `MapFormat.ts` - format definitions (doom, boom_doom, boom_doom2, hexen, zdoom_hexen, zdaemon)
+- `MapSelectionDialog.tsx` - map selection from WAD with format auto-detection
+- `NewMapDialog.tsx` - new map creation with format selection
+- Fix: WAD reader correctly reads only lumps for selected map (not just the last one)
 
-**Edit Modes - UX opravy:**
+**Edit Modes - UX fixes:**
 - `LinedefMode.ts`:
-  - Right-click na prázdné místo začne kreslení nové linie
-  - Left-click pokračuje v kreslení
-  - Right-click znovu nebo Escape zruší kreslení
-  - Metody: `startDrawing()`, `continueDrawing()`, `cancelDrawing()`
+  - Right-click on empty space starts drawing a new line
+  - Left-click continues drawing
+  - Right-click again or Escape cancels drawing
+  - Methods: `startDrawing()`, `continueDrawing()`, `cancelDrawing()`
 - `ThingMode.ts`:
-  - Right-click vloží nový thing
-  - Delete/Backspace smaže vybrané things
-  - Drag s undo/redo support (`MoveThingsAction`)
-  - Metody: `insertThing()`, `deleteSelected()`
+  - Right-click inserts a new thing
+  - Delete/Backspace deletes selected things
+  - Drag with undo/redo support (`MoveThingsAction`)
+  - Methods: `insertThing()`, `deleteSelected()`
 - `SectorMode.ts`:
-  - Box selection (click + drag na prázdné místo)
-  - Delete/Backspace smaže vybrané sektory
-  - Metody: `startBoxSelect()`, `finishBoxSelect()`, `deleteSelected()`
+  - Box selection (click + drag on empty space)
+  - Delete/Backspace deletes selected sectors
+  - Methods: `startBoxSelect()`, `finishBoxSelect()`, `deleteSelected()`
 
 **Actions:**
 - `ThingActions.ts` - CreateThingAction, DeleteThingsAction, MoveThingsAction
-- `SectorActions.ts` - DeleteSectorsAction (s kaskádovým mazáním sidedef/linedef)
+- `SectorActions.ts` - DeleteSectorsAction (with cascading sidedef/linedef deletion)
 
 **UI/UX:**
-- Toolbar s DoomBuilderX ikonami (`/public/icons/`)
-- `Icon.tsx`, `IconButton.tsx` komponenty
-- Toggle tlačítka pro Grid, Vertices, Things display
-- Clear All Data tlačítko (vymaže vše z localStorage)
-- Oprava PIXI renderingu - explicitní `app.render()` volání
+- Toolbar with DoomBuilderX icons (`/public/icons/`)
+- `Icon.tsx`, `IconButton.tsx` components
+- Toggle buttons for Grid, Vertices, Things display
+- Clear All Data button (clears everything from localStorage)
+- PIXI rendering fix - explicit `app.render()` call
 
 **Fixes:**
-- `WadReader.findMapLumps()` - správně detekuje konec mapy (kontrola MAP/ExMx patternů)
-- Renderer toggle visibility - přidán `app.render()` pro PIXI refresh
+- `WadReader.findMapLumps()` - correctly detects end of map (checking MAP/ExMx patterns)
+- Renderer toggle visibility - added `app.render()` for PIXI refresh
 
 **Known Issues:**
-- ~~🔄 Line drawing right-click - vyžaduje další ladění~~ ✅ Opraveno
+- ~~🔄 Line drawing right-click - requires further tuning~~ ✅ Fixed
 
 ### 2026-01-10 (Session 3)
 
-**Overlay System - Vizuální feedback:**
-- `OverlayState` interface v `interfaces.ts` - definuje selectionBox a drawingLine
-- `OverlayLayer.ts` - vykresluje:
-  - Selection box (modrý obdélník s průhlednou výplní)
-  - Drawing line preview (zelená čára s kruhy na koncích)
-- Všechny módy implementují `getOverlayState()`:
+**Overlay System - Visual feedback:**
+- `OverlayState` interface in `interfaces.ts` - defines selectionBox and drawingLine
+- `OverlayLayer.ts` - renders:
+  - Selection box (blue rectangle with transparent fill)
+  - Drawing line preview (green line with circles at endpoints)
+- All modes implement `getOverlayState()`:
   - VertexMode, LinedefMode, SectorMode, ThingMode
-- `ModeManager.getOverlayState()` - agreguje overlay state z aktuálního módu
-- `EditorController.getOverlayState()` - exponuje pro Viewport
-- `Viewport.tsx` - předává overlay state do rendereru
+- `ModeManager.getOverlayState()` - aggregates overlay state from the current mode
+- `EditorController.getOverlayState()` - exposes for Viewport
+- `Viewport.tsx` - passes overlay state to renderer
 
-**Změny v módech:**
-- Přidán `currentMousePos` tracking ve všech módech
-- LinedefMode má speciální `getDrawingLineState()` pro drawing preview
+**Mode changes:**
+- Added `currentMousePos` tracking in all modes
+- LinedefMode has special `getDrawingLineState()` for drawing preview
 
 **Renderer:**
-- `RenderOptions` rozšířen o `drawingLine`
-- `render()` předává oba overlay typy do `OverlayLayer`
-- Přidán `app.render()` pro PIXI refresh
+- `RenderOptions` extended with `drawingLine`
+- `render()` passes both overlay types to `OverlayLayer`
+- Added `app.render()` for PIXI refresh
 
-### 2026-01-10 (Session 4) - UX Vylepšení
+### 2026-01-10 (Session 4) - UX Improvements
 
-**Implementace podle UX.md:**
+**Implementation according to UX.md:**
 
-**TextureBrowserDialog - kompletní redesign:**
-- Virtuální scrolling pomocí `react-window` - renderuje jen viditelné textury
+**TextureBrowserDialog - complete redesign:**
+- Virtual scrolling using `react-window` - renders only visible textures
 - Category filter dropdown - All/Flats/Textures/Used in Map/Unused
-- Klávesová navigace šipkami v gridu
-- Počítadlo položek a rozměry vybrané textury
-- Nové závislosti: `react-window`, `@types/react-window`
+- Keyboard arrow navigation in grid
+- Item counter and dimensions of the selected texture
+- New dependencies: `react-window`, `@types/react-window`
 
-**SectorPropertiesDialog vylepšení:**
-- Prohozené pozice floor/ceiling (ceiling nahoře, floor dole - logické rozložení)
-- Nová `ScrubInput` komponenta s Photoshop-style scrubbing
-- Táhni na labelu pro změnu hodnoty (Shift: fine, Ctrl: fast)
-- Scroll wheel na inputech pro jemnou kontrolu
-- Zobrazení výšky sektoru (ceiling - floor)
+**SectorPropertiesDialog improvements:**
+- Swapped floor/ceiling positions (ceiling on top, floor on bottom - logical layout)
+- New `ScrubInput` component with Photoshop-style scrubbing
+- Drag on label to change value (Shift: fine, Ctrl: fast)
+- Scroll wheel on inputs for fine control
+- Sector height display (ceiling - floor)
 
-**StatusBar vylepšení:**
-- Zobrazení pozice kurzoru (X/Y)
-- Zobrazuje snapped pozici když je grid snap aktivní
-- Nový `cursorPosition` state v `editorStore`
+**StatusBar improvements:**
+- Cursor position display (X/Y)
+- Displays snapped position when grid snap is active
+- New `cursorPosition` state in `editorStore`
 
-**LinedefLayer vylepšení:**
-- Direction ticks na VŠECH linedefs (ne jen single-sided)
-- Kratší tick (4px) pro two-sided linedefs
-- Delší tick (8px) pro one-sided linedefs
+**LinedefLayer improvements:**
+- Direction ticks on ALL linedefs (not just single-sided)
+- Shorter tick (4px) for two-sided linedefs
+- Longer tick (8px) for one-sided linedefs
 
-**Nové klávesové zkratky v LinedefMode:**
-- `Shift+S` - Split Linedef (rozdělí uprostřed)
-- `Shift+C` - Curve Linedef (vytvoří Bezier křivku s 8 segmenty)
-- Obě akce dostupné i v kontextovém menu
+**New keyboard shortcuts in LinedefMode:**
+- `Shift+S` - Split Linedef (split in the middle)
+- `Shift+C` - Curve Linedef (create Bezier curve with 8 segments)
+- Both actions available in context menu
 
-**Nové Actions:**
-- `CurveLinedefAction` - vytvoří zakřivenou linii pomocí kvadratické Bezier křivky
-- Plně reversibilní (undo/redo support)
+**New Actions:**
+- `CurveLinedefAction` - creates curved line using quadratic Bezier curve
+- Fully reversible (undo/redo support)
 
-**Nové komponenty:**
-- `ScrubInput.tsx` - číselný input s drag-to-change a wheel support
-- `NumericInput.tsx` - jednodušší verze bez label scrubbing
+**New components:**
+- `ScrubInput.tsx` - numeric input with drag-to-change and wheel support
+- `NumericInput.tsx` - simpler version without label scrubbing
 
-**Soubory změněné:**
+**Files changed:**
 - `www/src/components/dialogs/TextureBrowserDialog.tsx`
 - `www/src/components/dialogs/SectorPropertiesDialog.tsx`
-- `www/src/components/common/ScrubInput.tsx` (nový)
+- `www/src/components/common/ScrubInput.tsx` (new)
 - `www/src/components/editor/StatusBar.tsx`
 - `www/src/components/editor/Viewport.tsx`
 - `www/src/store/editorStore.ts`
 - `www/src/renderer/layers/LinedefLayer.ts`
 - `www/src/core/editing/modes/LinedefMode.ts`
 - `www/src/core/editing/actions/VertexActions.ts`
-- `www/package.json` (nové závislosti)
+- `www/package.json` (new dependencies)
 
 ### 2026-01-10 (Session 5) - Sector Detection
 
-**Sector Detection implementace:**
-- `SectorBuilder.ts` - detekce uzavřených smyček z linedefs
-- `DetectSectorsAction` - action pro undo/redo (v SectorActions.ts)
-- Toolbar tlačítko "Detect Sectors from Closed Lines"
-- Klávesová zkratka `Shift+B`
+**Sector Detection implementation:**
+- `SectorBuilder.ts` - detection of closed loops from linedefs
+- `DetectSectorsAction` - action for undo/redo (in SectorActions.ts)
+- Toolbar button "Detect Sectors from Closed Lines"
+- Keyboard shortcut `Shift+B`
 
-**Jak funguje:**
-- Prochází všechny vertexy a hledá uzavřené polygony
-- Určuje winding (clockwise/counter-clockwise) pro front/back side
-- Automaticky vytváří sidedefs a přiřazuje k linedefům
-- Nastavuje TWOSIDED flag pro two-sided linedefs
+**How it works:**
+- Iterates through all vertices to find closed polygons
+- Determines winding (clockwise/counter-clockwise) for front/back side
+- Automatically creates sidedefs and assigns them to linedefs
+- Sets TWOSIDED flag for two-sided linedefs
 
-**react-window v2 migrace:**
-- Opraveny importy pro react-window v2 (FixedSizeGrid → Grid)
-- Nové API: `cellComponent`, `cellProps`, `gridRef`, `defaultWidth/Height`
-- `CellComponentProps` místo `GridChildComponentProps`
+**react-window v2 migration:**
+- Fixed imports for react-window v2 (FixedSizeGrid → Grid)
+- New API: `cellComponent`, `cellProps`, `gridRef`, `defaultWidth/Height`
+- `CellComponentProps` instead of `GridChildComponentProps`
 
-**Soubory změněné:**
+**Files changed:**
 - `www/src/core/editing/actions/SectorActions.ts` (DetectSectorsAction)
 - `www/src/components/editor/Toolbar.tsx` (handleDetectSectors)
 - `www/src/App.tsx` (Shift+B shortcut)
 - `www/src/components/dialogs/TextureBrowserDialog.tsx` (react-window v2)
 
-### 2026-01-10 (Session 5 - pokračování)
+### 2026-01-10 (Session 5 - continued)
 
-**Auto sector detection při kreslení:**
-- Po uzavření smyčky (připojení k existujícímu vertexu) se automaticky detekují sektory
-- `LinedefMode.continueDrawing()` - kontroluje jestli se připojujeme k existujícímu vertexu
-- `tryCreateSectorsFromNewLinedef()` - spustí detekci pokud existují linedefs bez sidedefů
+**Auto sector detection during drawing:**
+- After closing a loop (connecting to an existing vertex), sectors are automatically detected
+- `LinedefMode.continueDrawing()` - checks if connecting to an existing vertex
+- `tryCreateSectorsFromNewLinedef()` - starts detection if there are linedefs without sidedefs
 
-**SectorBuilder vylepšení:**
-- `createSectorFromLoop()` - přeskakuje smyčky které už mají sektory přiřazené
-- Kontrola `allSidesAssigned` - nedetekuje znovu existující sektory
-- Skip linedefs které už mají příslušný sidedef
+**SectorBuilder improvements:**
+- `createSectorFromLoop()` - skips loops that already have sectors assigned
+- `allSidesAssigned` check - does not re-detect existing sectors
+- Skip linedefs that already have the respective sidedef
 
-**Soubory změněné:**
+**Files changed:**
 - `www/src/core/editing/modes/LinedefMode.ts` (auto sector detection)
 - `www/src/core/geometry/SectorBuilder.ts` (skip existing sectors)
 
 ### 2026-01-10 (Session 6) - RMB Hover Drag & FLAT Textures
 
-**RMB Hover+Drag UX (inspirováno DoomBuilder/origo):**
-- Nové chování: RMB + hover bez výběru = dočasně vybrat, přetáhnout, po puštění odznačit
-- Implementováno ve všech 4 módech:
+**RMB Hover+Drag UX (inspired by DoomBuilder/original):**
+- New behavior: RMB + hover without selection = temporarily select, drag, deselect on release
+- Implemented in all 4 modes:
   - `VertexMode.ts` - `rmbHoverDragVertexId`
   - `LinedefMode.ts` - `rmbHoverDragLinedefId`
   - `SectorMode.ts` - `rmbHoverDragSectorId`
   - `ThingMode.ts` - `rmbHoverDragThingId`
-- Po `finishDrag()` nebo `cancelDrag()` se hover-drag element odznačí
-- RMB click (bez pohybu) stále otevírá properties dialog
+- After `finishDrag()` or `cancelDrag()`, the hover-drag element is deselected
+- RMB click (without movement) still opens properties dialog
 
 **ThingMode - RMB Insert + Drag:**
-- RMB na prázdné místo = vytvoří thing AND začne ho táhnout
-- Metoda `insertThingAndDrag()` - kombinuje vytvoření s okamžitým drag
-- Po puštění se thing odznačí (hover drag behavior)
-- Použije `lastThingType` z editor state (nebo default 1 = Player 1 start)
+- RMB on empty space = creates thing AND starts dragging it
+- `insertThingAndDrag()` method - combines creation with immediate drag
+- After release, the thing is deselected (hover drag behavior)
+- Uses `lastThingType` from editor state (or default 1 = Player 1 start)
 
-**FLAT textury ve viewportu:**
-- `SectorLayer.ts` - async loading textur pro PIXI v8:
-  - `pendingTextures` set pro tracking načítání
-  - `setTextureLoadedCallback()` pro trigger re-render po načtení
-  - Image → Canvas → PIXI.Texture (kompatibilní s PIXI v8)
-- `Renderer.ts` - propojení callback pro re-render
-- `invalidateTextureCache()` metoda pro změnu WAD
-- Textury se zobrazují v floor/ceiling view mode
+**FLAT textures in viewport:**
+- `SectorLayer.ts` - async loading of textures for PIXI v8:
+  - `pendingTextures` set for load tracking
+  - `setTextureLoadedCallback()` to trigger re-render after loading
+  - Image → Canvas → PIXI.Texture (compatible with PIXI v8)
+- `Renderer.ts` - link callback for re-render
+- `invalidateTextureCache()` method for WAD change
+- Textures are displayed in floor/ceiling view mode
 
 **TextureBrowserDialog - scrolling fix:**
-- Přidán explicit `height: gridHeight` na container
-- `overflow: auto` na Grid komponentu
-- Oprava pro react-window v2 virtualizaci
+- Fixed explicit `height: gridHeight` on container
+- `overflow: auto` on Grid component
+- Fix for react-window v2 virtualization
 
-**Soubory změněné:**
+**Files changed:**
 - `www/src/core/editing/modes/VertexMode.ts`
 - `www/src/core/editing/modes/LinedefMode.ts`
 - `www/src/core/editing/modes/SectorMode.ts`
@@ -341,49 +341,49 @@
 
 ### 2026-01-10 (Session 7) - WAD Export
 
-**WAD Writer implementace:**
-- `WadWriter.ts` - vytváří PWAD soubory z lumpů
-  - Header (PWAD magic, počet lumpů, offset directory)
+**WAD Writer implementation:**
+- `WadWriter.ts` - creates PWAD files from lumps
+  - Header (PWAD magic, lump count, directory offset)
   - Lump data + directory
-  - `download()` metoda pro stažení v prohlížeči
-- `MapWriter.ts` - konvertuje MapData na binární WAD lumpy
-  - Podporuje Doom i Hexen formát
-  - Správné remapování ID (vertices, sidedefs, sectors)
-  - Generuje prázdný BEHAVIOR lump pro Hexen
+  - `download()` method for in-browser download
+- `MapWriter.ts` - converts MapData to binary WAD lumps
+  - Supports Doom and Hexen format
+  - Correct ID remapping (vertices, sidedefs, sectors)
+  - Generates empty BEHAVIOR lump for Hexen
 
 **UI/UX:**
-- Toolbar tlačítko "Export to WAD" (ikona Test)
-- Klávesová zkratka `Ctrl+Shift+S`
-- Export stáhne `mapname.wad` soubor
+- Toolbar button "Export to WAD" (Test icon)
+- Keyboard shortcut `Ctrl+Shift+S`
+- Export downloads a `mapname.wad` file
 
-**Nové soubory:**
+**New files:**
 - `www/src/io/wad/WadWriter.ts`
 - `www/src/io/map/MapWriter.ts`
 
-**Soubory změněné:**
-- `www/src/store/mapStore.ts` - `exportToWad()` metoda
-- `www/src/components/editor/Toolbar.tsx` - export tlačítko
-- `www/src/App.tsx` - Ctrl+Shift+S zkratka
+**Files changed:**
+- `www/src/store/mapStore.ts` - `exportToWad()` method
+- `www/src/components/editor/Toolbar.tsx` - export button
+- `www/src/App.tsx` - Ctrl+Shift+S shortcut
 
 ### 2026-01-10 (Session 8) - Copy/Paste
 
-**Copy/Paste implementace:**
-- `clipboardStore.ts` - Zustand store pro clipboard data
-- `CopyPasteManager.ts` - centrální logika pro copy/paste operace:
-  - `copy()` - kopíruje vybrané elementy včetně souvisejících
-    - Vertices → kopíruje jen vertexy
-    - Linedefs → kopíruje linedefs + jejich vertexy + sidedefs
-    - Sectors → kopíruje sektory + linedefs + sidedefs + vertexy
-    - Things → kopíruje things
-  - `paste()` - vloží na pozici kurzoru s remapováním ID
+**Copy/Paste implementation:**
+- `clipboardStore.ts` - Zustand store for clipboard data
+- `CopyPasteManager.ts` - central logic for copy/paste operations:
+  - `copy()` - copies selected elements including related ones
+    - Vertices → copies only vertices
+    - Linedefs → copies linedefs + their vertices + sidedefs
+    - Sectors → copies sectors + linedefs + sidedefs + vertices
+    - Things → copies things
+  - `paste()` - pastes at cursor position with ID remapping
   - `cut()` - copy + delete
-  - `deleteSelection()` - smaže vybrané elementy s kaskádou
+  - `deleteSelection()` - deletes selected elements with cascading
 
-**Klávesové zkratky:**
+**Keyboard shortcuts:**
 - `Ctrl+C` - Copy
 - `Ctrl+X` - Cut
-- `Ctrl+V` - Paste (na pozici kurzoru)
-- `Delete` / `Backspace` - Smazat výběr
+- `Ctrl+V` - Paste (at cursor position)
+- `Delete` / `Backspace` - Delete selection
 
 **Nové soubory:**
 - `www/src/store/clipboardStore.ts`

@@ -15,8 +15,8 @@ services:
       - "traefik.http.routers.nexusforgia.entrypoints=websecure"
       - "traefik.http.routers.nexusforgia.tls.certresolver=letsencrypt"
       - "traefik.http.routers.nexusforgia.service=udmf-www-service"
-      # Dev - udmf.yrx.cz
-      - "traefik.http.routers.udmf-www.rule=Host(`udmf.yrx.cz`)"
+      # Dev - dev.nexumforgia.org
+      - "traefik.http.routers.udmf-www.rule=Host(`dev.nexumforgia.org`)"
       - "traefik.http.routers.udmf-www.entrypoints=websecure"
       - "traefik.http.routers.udmf-www.tls.certresolver=letsencrypt"
       - "traefik.http.routers.udmf-www.service=udmf-www-service"
@@ -36,8 +36,8 @@ services:
       - traefik_network
     labels:
       - "traefik.enable=true"
-      # API - api-udmf.yrx.cz
-      - "traefik.http.routers.udmf-api.rule=Host(`api-udmf.yrx.cz`)"
+      # API - api.nexumforgia.org
+      - "traefik.http.routers.udmf-api.rule=Host(`api.nexumforgia.org`)"
       - "traefik.http.routers.udmf-api.entrypoints=websecure"
       - "traefik.http.routers.udmf-api.tls.certresolver=letsencrypt"
       - "traefik.http.routers.udmf-api.service=udmf-api-service"

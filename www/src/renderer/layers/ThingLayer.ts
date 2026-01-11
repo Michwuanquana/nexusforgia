@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { MapData } from '../../core/map/MapData';
 import { Camera } from '../Camera';
+import { getThingType } from '../../data/thingTypes';
 
 export class ThingLayer {
   container: PIXI.Container;
@@ -32,22 +33,27 @@ export class ThingLayer {
 
     if (!showThings) return;
 
-    const baseRadius = Math.max(8, 16 / camera.zoom);
-
     for (const [id, thing] of map.things) {
       const isSelected = selectedIds?.has(id) ?? false;
       const isHighlighted = highlightedId === id;
 
+      // Get thing type info for proper size
+      const thingType = getThingType(thing.type);
+      const thingWidth = thingType?.width ?? 16;
+
+      // Use actual thing width as radius (width is diameter, so /2 for radius)
+      // Things scale naturally with the map (no inverse zoom scaling)
+      let radius = thingWidth / 2;
+
       let color = this.getThingColor(thing.type);
-      let radius = baseRadius;
 
       if (isSelected) {
         color = this.colors.selected;
-        radius = baseRadius * 1.2;
+        radius *= 1.2;
       }
       if (isHighlighted) {
         color = this.colors.highlighted;
-        radius = baseRadius * 1.4;
+        radius *= 1.4;
       }
 
       // Draw thing circle

@@ -3,7 +3,7 @@
 import { useEffect, useRef, memo, useMemo } from 'react';
 import { MapData } from '../../core/map/MapData';
 import { MapPreviewGenerator } from '../../core/preview/MapPreviewGenerator';
-import { PreviewOptions, DEFAULT_PREVIEW_OPTIONS } from '../../core/preview/types';
+import { type PreviewOptions, DEFAULT_PREVIEW_OPTIONS } from '../../core/preview/types';
 
 interface MapPreviewProps {
   map: MapData;

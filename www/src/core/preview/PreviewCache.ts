@@ -2,7 +2,7 @@
 
 import { MapData } from '../map/MapData';
 import { MapPreviewGenerator } from './MapPreviewGenerator';
-import { PreviewOptions } from './types';
+import type { PreviewOptions } from './types';
 
 interface CachedPreview {
   dataUrl: string;
