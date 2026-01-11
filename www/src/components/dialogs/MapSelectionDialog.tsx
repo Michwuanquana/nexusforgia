@@ -1,7 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { detectMapFormat, getFormatOptions, MAP_FORMATS, type MapFormatId } from '../../core/map/MapFormat';
 import type { WadLump } from '../../io/wad/WadReader';
 import { useEscapeKey } from '../../hooks/useEscapeKey';
+import { HexenMapReader } from '../../io/map/HexenMapReader';
+import { MapPreview } from '../editor/MapPreview';
+import { DOOM_AUTOMAP_COLORS } from '../../core/preview';
 
 interface MapSelectionDialogProps {
   open: boolean;
@@ -21,13 +24,17 @@ export function MapSelectionDialog({
   const [selectedMap, setSelectedMap] = useState<string>('');
   const [selectedFormat, setSelectedFormat] = useState<MapFormatId>('boom_doom2');
   const [detectedFormat, setDetectedFormat] = useState<MapFormatId>('boom_doom2');
+  const [previewMap, setPreviewMap] = useState<ReturnType<typeof HexenMapReader.read> | null>(null);
 
   // Close on Escape
   useEscapeKey(onCancel, open);
 
-  // Detect format when map selection changes
+  // Detect format and load map for preview when selection changes
   const detectFormat = useCallback((mapName: string) => {
-    if (!mapName) return;
+    if (!mapName) {
+      setPreviewMap(null);
+      return;
+    }
 
     const lumps = getLumpsForMap(mapName);
     const lumpSizes = new Map<string, { size: number }>();
@@ -38,6 +45,14 @@ export function MapSelectionDialog({
     const detected = detectMapFormat(lumpSizes);
     setDetectedFormat(detected);
     setSelectedFormat(detected);
+
+    // Load map for preview
+    try {
+      const mapData = HexenMapReader.read(lumps, mapName, detected);
+      setPreviewMap(mapData);
+    } catch {
+      setPreviewMap(null);
+    }
   }, [getLumpsForMap]);
 
   // Reset selection when dialog opens
@@ -78,6 +93,12 @@ export function MapSelectionDialog({
   const formatOptions = getFormatOptions(detectedFormat);
   const currentFormat = MAP_FORMATS[selectedFormat];
 
+  // Preview options
+  const previewOptions = useMemo(() => ({
+    colors: DOOM_AUTOMAP_COLORS,
+    padding: 8,
+  }), []);
+
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onCancel}>
       <div
@@ -98,22 +119,39 @@ export function MapSelectionDialog({
             Found {mapNames.length} map{mapNames.length !== 1 ? 's' : ''} in WAD file:
           </div>
 
-          {/* Map List */}
-          <div className="border border-[#444] rounded overflow-hidden max-h-64 overflow-y-auto mb-4">
-            {mapNames.map((mapName) => (
-              <div
-                key={mapName}
-                onClick={() => handleMapSelect(mapName)}
-                onDoubleClick={() => handleDoubleClick(mapName)}
-                className={`px-4 py-3 cursor-pointer transition-colors ${
-                  selectedMap === mapName
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-[#1e1e2e] text-gray-300 hover:bg-[#2a2a3e]'
-                }`}
-              >
-                <div className="font-mono font-semibold">{mapName}</div>
-              </div>
-            ))}
+          {/* Map List + Preview */}
+          <div className="flex gap-4 mb-4">
+            {/* Map List */}
+            <div className="flex-1 border border-[#444] rounded overflow-hidden max-h-64 overflow-y-auto">
+              {mapNames.map((mapName) => (
+                <div
+                  key={mapName}
+                  onClick={() => handleMapSelect(mapName)}
+                  onDoubleClick={() => handleDoubleClick(mapName)}
+                  className={`px-4 py-3 cursor-pointer transition-colors ${
+                    selectedMap === mapName
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-[#1e1e2e] text-gray-300 hover:bg-[#2a2a3e]'
+                  }`}
+                >
+                  <div className="font-mono font-semibold">{mapName}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Map Preview */}
+            <div className="w-40 h-40 bg-black border border-[#444] rounded flex items-center justify-center flex-shrink-0">
+              {previewMap ? (
+                <MapPreview
+                  map={previewMap}
+                  width={152}
+                  height={152}
+                  options={previewOptions}
+                />
+              ) : (
+                <span className="text-gray-600 text-xs">No preview</span>
+              )}
+            </div>
           </div>
 
           {/* Format Selection */}

@@ -172,13 +172,25 @@ export class MapPreviewGenerator {
    */
   static generateCanvas(
     map: MapData,
-    options: Partial<PreviewOptions> = {}
-  ): HTMLCanvasElement {
+    options: Partial<PreviewOptions> = {},
+    canvasFactory?: (width: number, height: number) => any
+  ): any {
     const opts = { ...DEFAULT_PREVIEW_OPTIONS, ...options };
 
-    const canvas = document.createElement('canvas');
-    canvas.width = opts.width;
-    canvas.height = opts.height;
+    let canvas;
+    if (canvasFactory) {
+      canvas = canvasFactory(opts.width, opts.height);
+    } else if (typeof OffscreenCanvas !== 'undefined') {
+      canvas = new OffscreenCanvas(opts.width, opts.height);
+    } else if (typeof document !== 'undefined') {
+      canvas = document.createElement('canvas');
+    } else {
+      throw new Error('Environment does not support Canvas creation');
+    }
+
+    // Set dimensions if not set by factory
+    if (canvas.width !== opts.width) canvas.width = opts.width;
+    if (canvas.height !== opts.height) canvas.height = opts.height;
 
     const ctx = canvas.getContext('2d', {
       alpha: false,
@@ -186,7 +198,7 @@ export class MapPreviewGenerator {
     })!;
 
     // Enable anti-aliasing
-    if (opts.antialias) {
+    if (opts.antialias && ctx.imageSmoothingEnabled !== undefined) {
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
     }
@@ -201,9 +213,10 @@ export class MapPreviewGenerator {
    */
   static generateDataURL(
     map: MapData,
-    options: Partial<PreviewOptions> = {}
+    options: Partial<PreviewOptions> = {},
+    canvasFactory?: (width: number, height: number) => any
   ): string {
-    const canvas = this.generateCanvas(map, options);
+    const canvas = this.generateCanvas(map, options, canvasFactory);
     return canvas.toDataURL('image/png');
   }
 
@@ -212,14 +225,24 @@ export class MapPreviewGenerator {
    */
   static async generateBlob(
     map: MapData,
-    options: Partial<PreviewOptions> = {}
+    options: Partial<PreviewOptions> = {},
+    canvasFactory?: (width: number, height: number) => any
   ): Promise<Blob> {
-    const canvas = this.generateCanvas(map, options);
+    const canvas = this.generateCanvas(map, options, canvasFactory);
+
+    if (typeof canvas.convertToBlob === 'function') {
+      return canvas.convertToBlob({ type: 'image/png' });
+    }
+
     return new Promise((resolve, reject) => {
-      canvas.toBlob(
-        (blob) => blob ? resolve(blob) : reject(new Error('Failed to create blob')),
-        'image/png'
-      );
+      if (typeof canvas.toBlob === 'function') {
+        canvas.toBlob(
+          (blob: any) => blob ? resolve(blob) : reject(new Error('Failed to create blob')),
+          'image/png'
+        );
+      } else {
+        reject(new Error('Canvas implementation does not support Blob export'));
+      }
     });
   }
 
@@ -655,6 +678,23 @@ await db.put('mapPreviews', {
 // Display in <img> tag
 const img = document.createElement('img');
 img.src = dataUrl;
+```
+
+### Server-Side (Node.js/Docker)
+
+Using `node-canvas` or similar library:
+
+```typescript
+import { createCanvas } from 'canvas';
+import { MapPreviewGenerator } from './core/preview/MapPreviewGenerator';
+
+const canvas = MapPreviewGenerator.generateCanvas(map, {
+  width: 800,
+  height: 600
+}, (w, h) => createCanvas(w, h));
+
+const buffer = canvas.toBuffer('image/png');
+// Save buffer to file or send to client
 ```
 
 ---
