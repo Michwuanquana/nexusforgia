@@ -1,8 +1,8 @@
-# NexumForgia
+# NexusForgia
 
 A web-based Doom map editor running entirely in your browser.
 
-*Nexum* (lat. "connection") + *Forgia* (it. "forge") — where geometry is forged and everything connects.
+*Nexus* (lat. "connection") + *Forgia* (it. "forge") — where geometry is forged and everything connects.
 
 **Live:** https://nexusforgia.org
 
@@ -101,7 +101,7 @@ This project builds on the shoulders of giants:
 - **[Doom Builder X](https://github.com/anotak/doombuilderx)** by anotak — Desktop map editor (C#) that inspired the UI patterns
 - **[SLADE](https://github.com/sirjuddington/SLADE)** by sirjuddington — Comprehensive Doom editor for reference on WAD formats
 
-Both projects are GPL-licensed, and NexumForgia continues this tradition.
+Both projects are GPL-licensed, and NexusForgia continues this tradition.
 
 ---
 
